@@ -1,0 +1,14 @@
+spring:
+    application:
+        name: security-module-oauth2
+        
+       
+                   
+config:
+    oauth2:
+        clientid: mdits
+        clientSecret: password
+        privateKey: -----BEGIN RSA PRIVATE KEY-----MIIEpAIBAAKCAQEA9QfanJMqa4VAIgvSqeQDkFNCjF/qcJh+fjy/bTe2ImOFMFtdMkaeqoxFtzLC9/4X8ojtCpi6y/p1sJZ/2bKobanVPGA0oEjjx1Zzi0hGSMCjs72lVHjNfHELgZHLJLLU0LygavhD3GereYJeXe6PDwY/PBOluj8nczafkwRC82cEtsboKTNRZAcc4XBHrPugfY8tsmFKjo5QqTyvlp6vtYc+a00Q6xBTBqYC+hV07goU/QJvRjJstf9jyI+uJ6eHZuahTaXI5G6HRoeP3kGOfpBLLilQUinCuUZ7BJdrCBmFjzg0+cRDnRV50kQdIKKFOCmsbgAZzziG2RyVaARuLwIDAQABAoIBAQDOdgixB5ulr0hjp5yhA/wwvscDKsqKhyOGUL9nUpsIDN0r6r/zXefRgpI3k/EOLq6U8OTymdBDkU1bNuSRVWVvybtfvRx6thAfZWvEP2jhYlhNWg2VyJg0M7hjO6p0yK5jF5z/pSLg8wVcRAopkZo/KZ9cip2I+i/Od4crxFp5ZX1OcB3v8CtZZCPjBZ+2sPRJlxkOibETyXOhOobGuPoz0QmqSZMiiQYU0PRG35oWb0HZt+EBEiSVOvrHlg2laUihr8wyPwL2XKmMH6LJHKpnSlmxo73sOXzeQa0/3lEo5FtiCdv+4BUEL6uhwrhSWuds8KorVCsZ/5Gz7MBx5cGhAoGBAP0aVk1osJYpLsBmRGvVjxWtYsMw6/GZ2UkcVvgmWes3uckNCaXaCuSIV26678OBrRHyroRv3+563obkbHneN6MSBDF3zlrLYKeOZXkU8GqH3cdcDPkpXg+XO8j95N9FDPr8CG6OtazQjW0w3h0H/mV/u2AAh1aqGN2qbl+YaXOfAoGBAPfV3O4kgvUKsupotD+pHgrXPdInEFUm96G84ztPiknBpxpxRP4TV9PalICQOIF7rJYJP7cdT7VgzBcl6tXFstM5pYHt2ZgVaX+kEDyMD3v2fWa6/BclkmPdVu90RPUVl/9pgjOXNFgvXIOn2GoYnewMmaOkpsfycgKTD1cZNXtxAoGBAJDf53BtsU5yikE1CIsU9c75rSN/OD7Vymsv3pQyF5wtDJoJbXFSqpN/e1R1ilJFQtSYLc6+3tX53LAnxfPH/97GrEHIiwSrj0q5llnFY4wG8ypvBToFtMKF1YHJ2pz2QGTVqNnntBQUWC+dHjZN4g8lGxLrmow/1vXi3US4z/uPAoGAbtPhT1Feiqv1JGQcLte2yoxEZgT4Bcw+MsKgLva71Y3W5zk97AzEWsXFYNSdoDGpFRMfvghKi8a0nalkIaKd/F0sCTVO9/ajTeQVKq5LgljQ7S6y6rrvgt8JMF2jNKIqbZpGEkIMs17ClVFqss89V8CuuAI6XvGpUENpOb7ZLtECgYAkv+RgBuGgvriZQizmYaXZnQiKRW0FMGERXap2F3a0Y1ZcHhOnWUIKUBQzYtkh2vAm+ELKbtt1rgSjvSAMnve8RFiow8xVjmetSeL8HRxCzP6Ul+jR82XPlmtn7ZFAQJ3n8AzUH0TZ6fa59v9gRFblVghjXEsBUSxl+y0p+S8uQw==-----END RSA PRIVATE KEY-----
+        publicKey: -----BEGIN PUBLIC KEY-----MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsY9wY6rwdql0GCPFxu7eEypLC8TkDQHgaFlmP5QBf7Il4/8/ogTrT1cLF/fMrfhoJrPeZWjzP6NmaxttCUcki8JSbmaxdYNnIPHsPFvqr1DlpvikdKiG5lkKS27E9uUQ1XmeXh9Vhn9QwLQyXl5bbbjlDewiCzB/MuKlbuuxFsb7ZPpBD+rE69efUfTu8dZPa5QzTugqxqAe9q2soLPxYyh91BGjVGWMN9wwWnM+WaQ9IehuQko7drlvJRVhPow9zvzTanaJckn02+Ubj5+LFQ8yYNe/PQQSS+noaQtmCqRfVhL161F6yivj16EuYJhkUn3TQQTbDhSU3CcdMcX5lQIDAQAB-----END PUBLIC KEY-----
+        token-validity-in-seconds: 86400
+         
