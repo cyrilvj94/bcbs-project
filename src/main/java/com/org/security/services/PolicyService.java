@@ -19,4 +19,8 @@ public class PolicyService {
 		return policyRepo.findAll();
 	}
 
+	public Policy addNewPolicy(Policy policy) {
+		return policyRepo.save(policy);
+	}
+
 }

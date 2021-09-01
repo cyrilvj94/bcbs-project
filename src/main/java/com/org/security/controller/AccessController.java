@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,21 +14,31 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.org.security.model.Benefits;
+import com.org.security.model.Policy;
 import com.org.security.model.Resource;
 import com.org.security.model.ResourcePerm;
 import com.org.security.model.ResourcePermission;
 import com.org.security.model.Role;
 import com.org.security.model.RolePermission;
 import com.org.security.service.AccessService;
+import com.org.security.services.BenefitsService;
+import com.org.security.services.PolicyService;
+
 
 @RestController
 @RequestMapping("/api/access")
-
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class AccessController {
+	
+	@Autowired
+	private PolicyService policyService;
 
 	@Autowired
 	private AccessService accessService;
+	
+	@Autowired
+	private BenefitsService benefitsService;
 
 	@PostMapping("/addResource")
 	// @PreAuthorize("hasRole('SUPER_ADMIN') or hasRole('ADMIN')")
@@ -124,5 +135,32 @@ public class AccessController {
 
 		return accessService.getPermissionsByRoleId(roleID);
 	}
+	
+	@GetMapping("/policy")
+	public List<Policy> getAllPolicy() {
+		
+		return policyService.getAllPlans();
+	}
     
+	@GetMapping("benefits")
+	public List<Benefits> getAllBenefits() {
+		return benefitsService.getAllBenefits();
+	}
+	
+	@PostMapping("/benefits")
+	public Benefits addNewBenefits(@RequestBody Benefits benefits) {
+		return benefitsService.addNewBenefit(benefits);
+	}
+	
+	@DeleteMapping("/benefits/{id}")
+	public String deleteBenefits(@PathVariable Long id) {
+		 benefitsService.deleteById(id);
+		 return "Deleted ";
+	}
+	
+	@PostMapping("/policy")
+	public Policy addNewPolicy(@RequestBody Policy policy) {
+		return policyService.addNewPolicy(policy);
+	}
+	
 }

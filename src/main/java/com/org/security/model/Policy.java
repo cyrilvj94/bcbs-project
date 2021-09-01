@@ -23,7 +23,7 @@ public class Policy {
 
 	@Id
 	@SequenceGenerator(name = "policy_sequence", sequenceName = "policy_sequence",
-					allocationSize = 1)
+					allocationSize = 10)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "policy_sequence")
 	private Long policyId;
 	private String policyName;
