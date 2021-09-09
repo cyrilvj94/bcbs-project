@@ -32,6 +32,10 @@ public class MemberService {
 	public Optional<Member> detailsEnquiry(Long aadhar) {
 		return memberRepository.findMemberByAadhar(aadhar);
 	}
+
+	public Optional<Member> findByName(String name) {
+		return memberRepository.findMemberByName(name);
+	}
 	
 	
 	

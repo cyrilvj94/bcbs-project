@@ -11,11 +11,22 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.org.security.repository.MemberRepository;
+import com.org.security.repository.PolicyRepository;
 
 @Entity
 @Table(name = "member")
 
 public class Member {
+	
+	
+	@Autowired
+	@Transient
+	PolicyRepository policyRepository;
 	
 	@Id
 	@SequenceGenerator(name = "member_sequence", sequenceName = "member_sequence",
@@ -32,6 +43,8 @@ public class Member {
 	private String emailAddress;
 	private boolean isPremium;
 	
+	@Transient
+	private Long policyId;
 	//Defining relationship. This member takes which policy?
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(
@@ -39,6 +52,13 @@ public class Member {
 			referencedColumnName = "policyId")
 	private Policy policy;
 	
+	
+	public Long getPolicyId() {
+		return policyId;
+	}
+	public void setPolicyId(Long policyId) {
+		this.policyId = policyId;
+	}
 	
 	public Policy getPolicy() {
 		return policy;
@@ -105,9 +125,12 @@ public class Member {
 	public Member() {
 		super();
 	}
-	public Member(Long member_id, String name, LocalDate startDate, LocalDate expiryDate, 
-			LocalDate dob, String address, Long aadhar,
-			String emailAddress, boolean isPremium) {
+	
+
+	
+	public Member(Long member_id, String name, LocalDate startDate,
+			LocalDate expiryDate, LocalDate dob, String address,
+			Long aadhar, String emailAddress, boolean isPremium, Long policyId) {
 		super();
 		this.member_id = member_id;
 		this.name = name;
@@ -118,22 +141,9 @@ public class Member {
 		this.aadhar = aadhar;
 		this.emailAddress = emailAddress;
 		this.isPremium = isPremium;
+		this.policyId = policyId;
+		this.policy = policyRepository.findById(policyId).get();
 	}
-	
-	public Member(String name, LocalDate startDate, LocalDate expiryDate, LocalDate dob,
-			String address, Long aadhar,
-			String emailAddress, boolean isPremium) {
-		super();
-		this.name = name;
-		this.startDate = startDate;
-		this.expiryDate = expiryDate;
-		this.dob = dob;
-		this.address = address;
-		this.aadhar = aadhar;
-		this.emailAddress = emailAddress;
-		this.isPremium = isPremium;
-	}
-	
 	@Override
 	public String toString() {
 		return "Member [member_id=" + member_id + ", name=" + name + ", startDate=" + startDate + ", expiryDate="

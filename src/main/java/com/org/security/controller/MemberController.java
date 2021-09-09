@@ -32,7 +32,7 @@ public class MemberController {
 
 	//get all members
 	@GetMapping("/viewAll")
-	@PreAuthorize("hasPermission('"+PermissionURLConstants.MEMBER_API_SERVICE+"','"+PermissionURLConstants.VIEW+"')")
+	// @PreAuthorize("hasPermission('"+PermissionURLConstants.MEMBER_API_SERVICE+"','"+PermissionURLConstants.VIEW+"')")
 	public List<Member> viewAllMembers(){
 		return memberService.getAllMembers() ;
 	}
@@ -62,5 +62,17 @@ public class MemberController {
 		return member;
 	}
 	
+	@GetMapping("/getPolicyId/{aadhar}")
+	public Long getPolicyId(@PathVariable Long aadhar) {
+		Optional<Member> member = memberService.detailsEnquiry(aadhar);
+		return member.get().getPolicy().getPolicyId();
+	}
+	
+	@GetMapping("/getMemberInfo/{username}")
+	public Optional<Member> getMemberInfo(@PathVariable String username) {
+		return memberService.findByName(username);
+	//	return "member service" + " " + username;
+	}
+
 	
 }

@@ -23,6 +23,17 @@ public class Benefits {
 	public void setBenefitName(String benefitName) {
 		this.benefitName = benefitName;
 	}
+	
+	
+	public Benefits(Long benefitId, String benefitName) {
+		super();
+		this.benefitId = benefitId;
+		this.benefitName = benefitName;
+	}
+	
+	public Benefits() {
+		
+	}
 	@Override
 	public String toString() {
 		return "Benefits [benefitId=" + benefitId + ", benefitName=" + benefitName + "]";

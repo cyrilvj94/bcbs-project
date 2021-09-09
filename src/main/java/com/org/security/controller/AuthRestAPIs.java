@@ -21,9 +21,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.org.security.jwt.JwtProvider;
+import com.org.security.model.Role;
+import com.org.security.model.UserModel;
+import com.org.security.repository.UserRepository;
+import com.org.security.repository.RoleRepository;
 import com.org.security.request.LoginForm;
 import com.org.security.request.SignUpForm;
 import com.org.security.response.JwtResponse;
+import com.org.security.response.ResponseMessage;
 
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -39,6 +44,12 @@ public class AuthRestAPIs {
 
 	@Autowired
 	JwtProvider jwtProvider;
+	
+	@Autowired
+	UserRepository userRepository;
+	
+	@Autowired
+	RoleRepository roleRepository;
 
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
@@ -54,6 +65,63 @@ public class AuthRestAPIs {
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
 		return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities()));
+	}
+	
+	
+	@PostMapping("/signup")
+	public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
+		
+		System.out.println(signUpRequest);
+		//If no role is passed set the role as user
+		if (signUpRequest.getRole() == null ) {
+			signUpRequest.setRole(Set.of("user"));
+		}
+		//System.out.println(signUpRequest.getRole());
+		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+			return new ResponseEntity<>(new ResponseMessage("Fail -> Username is already taken!"),
+					HttpStatus.BAD_REQUEST);
+		}
+
+		if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+			return new ResponseEntity<>(new ResponseMessage("Fail -> Email is already in use!"),
+					HttpStatus.BAD_REQUEST);
+		}
+
+		// Creating user's account
+		UserModel user = new UserModel(signUpRequest.getName(), signUpRequest.getUsername(), signUpRequest.getEmail(),
+				encoder.encode(signUpRequest.getPassword()));
+
+		Set<String> strRoles = signUpRequest.getRole();
+		Set<Role> roles = new HashSet<>();
+		
+		
+		
+
+		strRoles.forEach(role -> {
+			switch (role) {
+			case "admin":
+				Role adminRole = roleRepository.findByroleName("admin");
+				roles.add(adminRole);
+				break;
+			case "pm":
+				Role pmRole = roleRepository.findByroleName("pm");
+				roles.add(pmRole);
+				break;
+			case "member":
+				Role memberRole=roleRepository.findByroleName("member");
+				roles.add(memberRole);
+				break;
+			default:
+				Role userRole = roleRepository.findByroleName("user");
+				roles.add(userRole);
+				roles.add(userRole);
+			}
+		});
+
+		user.setRoles(roles);
+		userRepository.save(user);
+
+		return new ResponseEntity<>(new ResponseMessage("User registered successfully!"), HttpStatus.OK);
 	}
 
 	

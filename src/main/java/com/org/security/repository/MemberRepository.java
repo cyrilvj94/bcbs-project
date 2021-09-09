@@ -12,6 +12,8 @@ public interface MemberRepository extends JpaRepository<Member, Long>{
 	@Query("SELECT s FROM Member s WHERE s.aadhar=?1")
 	Optional<Member> findMemberByAadhar(Long aadhar);
 	
+	@Query("SELECT s FROM Member s WHERE s.name=?1")
+	Optional<Member> findMemberByName(String name);
 	
 
 }
